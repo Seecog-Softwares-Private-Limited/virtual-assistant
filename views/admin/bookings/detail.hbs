@@ -1,0 +1,127 @@
+<div class="max-w-4xl">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Booking Details</h1>
+    <a href="/admin/bookings" class="text-purple-600 dark:text-purple-400 hover:underline">← Back to bookings</a>
+  </div>
+  
+  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 mb-6">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-bold text-gray-900 dark:text-white">Booking #{{booking.id}}</h2>
+      <span class="px-3 py-1 text-sm font-semibold rounded-full 
+        {{#if (eq booking.status 'New')}}bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300{{/if}}
+        {{#if (eq booking.status 'Confirmed')}}bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300{{/if}}
+        {{#if (eq booking.status 'Completed')}}bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300{{/if}}
+        {{#if (eq booking.status 'Cancelled')}}bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300{{/if}}
+      ">
+        {{booking.status}}
+      </span>
+    </div>
+    
+    <!-- Status Update Form -->
+    <form action="/admin/bookings/{{booking.id}}/status" method="POST" class="mb-8 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
+      <div class="flex items-center space-x-4">
+        <label class="text-sm font-semibold text-gray-700 dark:text-gray-300">Update Status:</label>
+        <select name="status" class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+          <option value="New" {{#if (eq booking.status 'New')}}selected{{/if}}>New</option>
+          <option value="Confirmed" {{#if (eq booking.status 'Confirmed')}}selected{{/if}}>Confirmed</option>
+          <option value="Completed" {{#if (eq booking.status 'Completed')}}selected{{/if}}>Completed</option>
+          <option value="Cancelled" {{#if (eq booking.status 'Cancelled')}}selected{{/if}}>Cancelled</option>
+        </select>
+        <button type="submit" class="btn-primary">Update</button>
+        {{#if (eq booking.status 'New')}}
+          <form action="/admin/bookings/{{booking.id}}/status" method="POST" class="inline">
+            <input type="hidden" name="status" value="Confirmed">
+            <button type="submit" class="btn-secondary">Mark Confirmed</button>
+          </form>
+        {{/if}}
+      </div>
+    </form>
+    
+    <!-- Booking Information -->
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Contact Information</h3>
+        <dl class="space-y-2">
+          <div>
+            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Name</dt>
+            <dd class="text-sm text-gray-900 dark:text-white">{{booking.customer_name}}</dd>
+          </div>
+          <div>
+            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Email</dt>
+            <dd class="text-sm text-gray-900 dark:text-white">{{booking.email}}</dd>
+          </div>
+          <div>
+            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Phone</dt>
+            <dd class="text-sm text-gray-900 dark:text-white">{{booking.phone}}</dd>
+          </div>
+        </dl>
+      </div>
+      
+      <div>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Pet Information</h3>
+        <dl class="space-y-2">
+          {{#if booking.pet_type}}
+            <div>
+              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Pet Type</dt>
+              <dd class="text-sm text-gray-900 dark:text-white">{{booking.pet_type}}</dd>
+            </div>
+          {{/if}}
+          {{#if booking.pet_breed}}
+            <div>
+              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Breed</dt>
+              <dd class="text-sm text-gray-900 dark:text-white">{{booking.pet_breed}}</dd>
+            </div>
+          {{/if}}
+          {{#if booking.pet_age}}
+            <div>
+              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Age</dt>
+              <dd class="text-sm text-gray-900 dark:text-white">{{booking.pet_age}}</dd>
+            </div>
+          {{/if}}
+        </dl>
+      </div>
+    </div>
+    
+    <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Service Details</h3>
+      <dl class="space-y-2">
+        <div>
+          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Service</dt>
+          <dd class="text-sm text-gray-900 dark:text-white">{{booking.service_title_snapshot}}</dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Preferred Date</dt>
+          <dd class="text-sm text-gray-900 dark:text-white">{{booking.preferred_date}}</dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Preferred Time</dt>
+          <dd class="text-sm text-gray-900 dark:text-white">{{booking.preferred_time}}</dd>
+        </div>
+      </dl>
+    </div>
+    
+    <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Address</h3>
+      <p class="text-sm text-gray-900 dark:text-white">
+        {{booking.address_line1}}{{#if booking.address_line2}}<br>{{booking.address_line2}}{{/if}}<br>
+        {{booking.city}}{{#if booking.state}}, {{booking.state}}{{/if}} {{booking.pincode}}
+      </p>
+    </div>
+    
+    {{#if booking.notes}}
+      <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Notes</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">{{booking.notes}}</p>
+      </div>
+    {{/if}}
+    
+    <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+      <form action="/admin/bookings/{{booking.id}}/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this booking?');">
+        <button type="submit" class="px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors">
+          Delete Booking
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+

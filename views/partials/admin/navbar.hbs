@@ -1,0 +1,41 @@
+<nav class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center space-x-4">
+        <a href="/admin" class="flex items-center space-x-2">
+          <div class="w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <span class="text-xl font-bold gradient-text">Stella Admin</span>
+        </a>
+        
+        <div class="hidden md:flex items-center space-x-1 ml-8">
+          <a href="/admin" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors {{#if (eq activeRoute '/admin')}}bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400{{else}}text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700{{/if}}">
+            Dashboard
+          </a>
+          <a href="/admin/bookings" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors {{#if (eq activeRoute '/admin/bookings')}}bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400{{else}}text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700{{/if}}">
+            Bookings
+          </a>
+          <a href="/admin/services" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors {{#if (eq activeRoute '/admin/services')}}bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400{{else}}text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700{{/if}}">
+            Services
+          </a>
+          <a href="/admin/pricing" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors {{#if (eq activeRoute '/admin/pricing')}}bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400{{else}}text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700{{/if}}">
+            Pricing
+          </a>
+        </div>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <span class="text-sm text-gray-600 dark:text-gray-400 hidden md:block">{{adminEmail}}</span>
+        <form action="/admin/logout" method="POST" class="inline">
+          <button type="submit" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-sm font-medium">
+            Logout
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>
+

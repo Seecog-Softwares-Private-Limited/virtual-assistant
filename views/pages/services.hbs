@@ -1,0 +1,105 @@
+<section class="py-12 bg-gray-50 dark:bg-gray-800">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Our Services</h1>
+      <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        Professional pet care services delivered to your home
+      </p>
+    </div>
+    
+    <!-- Category Filter -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12">
+      {{#each categories}}
+        <a href="/services?category={{this}}" 
+           class="px-6 py-2 rounded-full font-medium transition-all {{#if (eq ../activeCategory this)}}bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg{{else}}bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600{{/if}}">
+          {{this}}
+        </a>
+      {{/each}}
+    </div>
+    
+    <!-- Services Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      {{#each services}}
+        <div class="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-700">
+          <div class="w-14 h-14 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-xl flex items-center justify-center mb-4">
+            {{#if (eq icon 'scissors')}}
+              <svg class="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"></path>
+              </svg>
+            {{else if (eq icon 'dog')}}
+              <svg class="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            {{else if (eq icon 'syringe')}}
+              <svg class="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+              </svg>
+            {{else if (eq icon 'package')}}
+              <svg class="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+              </svg>
+            {{else if (eq icon 'home')}}
+              <svg class="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+              </svg>
+            {{else if (eq icon 'graduation-cap')}}
+              <svg class="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14v9M12 14l-9-5M12 14l9-5M12 14v9"></path>
+              </svg>
+            {{/if}}
+          </div>
+          <div class="mb-2">
+            <span class="text-sm font-semibold text-purple-600 dark:text-purple-400">{{category}}</span>
+          </div>
+          <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-3">{{title}}</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">{{description}}</p>
+          <div class="mb-4">
+            <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Includes:</p>
+            <ul class="space-y-1">
+              {{#each included}}
+                <li class="text-sm text-gray-600 dark:text-gray-400 flex items-center">
+                  <svg class="w-4 h-4 mr-2 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  {{this}}
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+          <div class="flex items-center justify-between mb-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <span class="text-sm text-gray-500 dark:text-gray-400">{{duration_mins}} mins</span>
+            <span class="text-xl font-bold text-purple-600 dark:text-purple-400">Starting at ₹{{starting_price}}</span>
+          </div>
+          <a href="/booking?service={{id}}" class="btn-primary w-full text-center">Book This Service</a>
+        </div>
+      {{/each}}
+    </div>
+    
+    <!-- Safety & Hygiene Banner -->
+    <div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-8 md:p-12 text-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Safety & Hygiene First</h2>
+        <p class="text-lg text-purple-100 mb-6">
+          Your pet's health and safety are our top priorities. All our caregivers follow strict hygiene protocols and use sanitized equipment for every service.
+        </p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div>
+            <h3 class="font-semibold mb-2">Sanitized Equipment</h3>
+            <p class="text-purple-100 text-sm">All tools and equipment are thoroughly sanitized before each visit.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-2">Certified Professionals</h3>
+            <p class="text-purple-100 text-sm">Our team is trained in pet safety and emergency protocols.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-2">Health Screening</h3>
+            <p class="text-purple-100 text-sm">We monitor our caregivers' health to ensure your pet's safety.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

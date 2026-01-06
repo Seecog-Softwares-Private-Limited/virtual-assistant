@@ -1,0 +1,42 @@
+{
+  "name": "stella-pet-services",
+  "version": "1.0.0",
+  "description": "Premium at-home pet services website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "start:full": "node scripts/startup.js",
+    "dev:full": "node scripts/startup.js --dev",
+    "start:seed": "SEED_DATA=true node scripts/startup.js",
+    "dev:seed": "SEED_DATA=true node scripts/startup.js --dev",
+    "build:css": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch",
+    "build:css:prod": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --minify",
+    "migrate": "node db/migrate.js",
+    "seed": "node db/seed.js",
+    "create-admin": "node scripts/createAdmin.js",
+    "setup": "npm run migrate && npm run seed && echo '\n✅ Setup complete! Run: npm run create-admin'\n"
+  },
+  "keywords": [
+    "pet-services",
+    "grooming",
+    "veterinary"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^17.2.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "express-rate-limit": "^7.5.1",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.3.1",
+    "mysql2": "^3.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "tailwindcss": "^3.3.6"
+  }
+}

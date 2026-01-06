@@ -1,0 +1,55 @@
+[
+  {
+    "id": 1,
+    "name": "Silver",
+    "priceMonthly": 49,
+    "features": [
+      "2 grooming visits/month",
+      "4 walk credits",
+      "Email support",
+      "5% delivery discount",
+      "Basic health tips"
+    ],
+    "isPopular": false,
+    "isActive": true,
+    "sortOrder": 1,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "name": "Gold",
+    "priceMonthly": 89,
+    "features": [
+      "4 grooming visits/month",
+      "8 walk credits",
+      "Priority support",
+      "10% delivery discount",
+      "Vet hotline access",
+      "Training session discount"
+    ],
+    "isPopular": true,
+    "isActive": true,
+    "sortOrder": 2,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "name": "Platinum",
+    "priceMonthly": 149,
+    "features": [
+      "Unlimited grooming visits",
+      "Unlimited walk credits",
+      "24/7 priority support",
+      "20% delivery discount",
+      "Free vet consultations",
+      "Free training sessions",
+      "Boarding priority booking",
+      "Monthly health reports"
+    ],
+    "isPopular": false,
+    "isActive": true,
+    "sortOrder": 3,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  }
+]
+

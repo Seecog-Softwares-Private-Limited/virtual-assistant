@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "passwordHash": "$2b$10$7midUkRs.XFRN842E9CZE.WuV0SU0N8IVT66Y7w4v0hezaNp6jgjK",
+    "email": "admin@stellapetservices.com",
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  }
+]

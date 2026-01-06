@@ -1,0 +1,201 @@
+<section class="py-12 bg-gray-50 dark:bg-gray-800 min-h-screen">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+    {{#if success}}
+      <!-- Success State -->
+      <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 md:p-12 shadow-lg text-center">
+        <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center">
+          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Booking Confirmed!</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
+          Thank you, {{booking.customer_name}}! We've received your booking request for {{booking.service_title_snapshot}}.
+        </p>
+        <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 mb-8 text-left max-w-md mx-auto">
+          <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Booking Details</h3>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between">
+              <span class="text-gray-600 dark:text-gray-400">Service:</span>
+              <span class="font-medium text-gray-900 dark:text-white">{{booking.service_title_snapshot}}</span>
+            </div>
+            {{#if booking.pet_type}}
+              <div class="flex justify-between">
+                <span class="text-gray-600 dark:text-gray-400">Pet:</span>
+                <span class="font-medium text-gray-900 dark:text-white">{{booking.pet_type}}</span>
+              </div>
+            {{/if}}
+            <div class="flex justify-between">
+              <span class="text-gray-600 dark:text-gray-400">Date:</span>
+              <span class="font-medium text-gray-900 dark:text-white">{{booking.preferred_date}}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600 dark:text-gray-400">Time:</span>
+              <span class="font-medium text-gray-900 dark:text-white">{{booking.preferred_time}}</span>
+            </div>
+          </div>
+        </div>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">
+          We'll send a confirmation email to {{booking.email}} shortly. Our team will contact you within 24 hours to finalize the details.
+        </p>
+        <a href="/" class="btn-primary">Return Home</a>
+      </div>
+    {{else}}
+      <!-- Booking Form -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Book a Service</h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400">
+          Fill out the form below to schedule your pet's care
+        </p>
+      </div>
+      
+      <form action="/booking" method="POST" class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg" x-data="{ currentStep: 1, totalSteps: 4 }">
+        <!-- Progress Indicator -->
+        <div class="mb-8">
+          <div class="flex items-center justify-between mb-4">
+            {{#times 4}}
+              <div class="flex-1">
+                <div class="flex items-center">
+                  <div class="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
+                    <div class="h-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full transition-all duration-300"
+                         :style="`width: ${currentStep > {{this}} ? '100%' : currentStep === {{this}} ? '50%' : '0%'}`"></div>
+                  </div>
+                  <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all"
+                       :class="currentStep > {{this}} ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white' : currentStep === {{this}} ? 'bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-400' : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'">
+                    {{add this 1}}
+                  </div>
+                </div>
+              </div>
+            {{/times}}
+          </div>
+          <div class="flex justify-between text-xs text-gray-500 dark:text-gray-400">
+            <span>Service</span>
+            <span>Pet Details</span>
+            <span>Address</span>
+            <span>Contact</span>
+          </div>
+        </div>
+        
+        <!-- Step 1: Service & Package -->
+        <div x-show="currentStep === 1" x-transition>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Choose Service & Package</h2>
+          <div class="space-y-4 mb-6">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Service *</label>
+              <select name="service" id="serviceSelect" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                <option value="">Select a service</option>
+                {{#each services}}
+                  <option value="{{title}}" data-id="{{id}}">{{title}}</option>
+                {{/each}}
+              </select>
+              <input type="hidden" name="serviceId" id="serviceId">
+              <input type="hidden" name="petType" value="Dog">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Package (Optional)</label>
+              <select name="package" class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                <option value="">No package</option>
+                <option value="Silver">Silver</option>
+                <option value="Gold">Gold</option>
+                <option value="Platinum">Platinum</option>
+              </select>
+            </div>
+          </div>
+          <button type="button" @click="currentStep = 2" class="btn-primary w-full">Continue</button>
+        </div>
+        
+        <!-- Step 2: Pet Details -->
+        <div x-show="currentStep === 2" x-transition>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Pet Details</h2>
+          <div class="space-y-4 mb-6">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Pet Name *</label>
+              <input type="text" name="petName" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Breed *</label>
+              <input type="text" name="petBreed" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Age *</label>
+                <input type="text" name="petAge" required placeholder="e.g., 3 years" class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Allergies</label>
+                <input type="text" name="allergies" placeholder="List any allergies" class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <button type="button" @click="currentStep = 1" class="btn-secondary flex-1">Back</button>
+            <button type="button" @click="currentStep = 3" class="btn-primary flex-1">Continue</button>
+          </div>
+        </div>
+        
+        <!-- Step 3: Address & Schedule -->
+        <div x-show="currentStep === 3" x-transition>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Address & Schedule</h2>
+          <div class="space-y-4 mb-6">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Street Address *</label>
+              <input type="text" name="address" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">City *</label>
+                <input type="text" name="city" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">ZIP Code *</label>
+                <input type="text" name="zipCode" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+              </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Preferred Date *</label>
+                <input type="date" name="preferredDate" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Preferred Time *</label>
+                <input type="time" name="preferredTime" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Special Notes</label>
+              <textarea name="notes" rows="3" placeholder="Any special instructions or requests..." class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <button type="button" @click="currentStep = 2" class="btn-secondary flex-1">Back</button>
+            <button type="button" @click="currentStep = 4" class="btn-primary flex-1">Continue</button>
+          </div>
+        </div>
+        
+        <!-- Step 4: Contact Info -->
+        <div x-show="currentStep === 4" x-transition>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Information</h2>
+          <div class="space-y-4 mb-6">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Full Name *</label>
+              <input type="text" name="contactName" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Email *</label>
+              <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Phone *</label>
+              <input type="tel" name="phone" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <button type="button" @click="currentStep = 3" class="btn-secondary flex-1">Back</button>
+            <button type="submit" class="btn-primary flex-1">Complete Booking</button>
+          </div>
+        </div>
+      </form>
+    {{/if}}
+  </div>
+</section>
+

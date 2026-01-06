@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "category": "Grooming",
+    "title": "Professional Grooming",
+    "description": "Full-service grooming at your home. Includes bath, brush, nail trim, ear cleaning, and styling.",
+    "durationMins": 120,
+    "startingPrice": 44,
+    "includes": [
+      "Bath & dry\r",
+      "Haircut & styling\r",
+      "Nail trimming\r",
+      "Ear cleaning\r",
+      "Sanitary trim"
+    ],
+    "isActive": true,
+    "sortOrder": 1,
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2025-12-25T11:22:26.535Z"
+  },
+  {
+    "id": 2,
+    "category": "Walking",
+    "title": "Dog Walking",
+    "description": "Regular walks to keep your pet healthy and happy. Flexible scheduling for your busy lifestyle.",
+    "durationMins": 30,
+    "startingPrice": 25,
+    "includes": [
+      "GPS tracking",
+      "Photo updates",
+      "Water provided",
+      "Exercise report"
+    ],
+    "isActive": true,
+    "sortOrder": 2,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "category": "Vet/Vaccination",
+    "title": "At-Home Vaccination",
+    "description": "Licensed veterinarians come to your home for vaccinations and health checkups.",
+    "durationMins": 30,
+    "startingPrice": 120,
+    "includes": [
+      "Vaccination",
+      "Health checkup",
+      "Certificate",
+      "Follow-up care"
+    ],
+    "isActive": true,
+    "sortOrder": 3,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "category": "Food Delivery",
+    "title": "Premium Food Delivery",
+    "description": "Fresh, premium pet food delivered to your door. Customized meal plans available.",
+    "durationMins": 0,
+    "startingPrice": 45,
+    "includes": [
+      "Free delivery",
+      "Meal planning",
+      "Nutritional guidance",
+      "Auto-refill option"
+    ],
+    "isActive": true,
+    "sortOrder": 4,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 5,
+    "category": "Shelter/Boarding",
+    "title": "Home Boarding",
+    "description": "Safe, comfortable boarding in a home environment. Your pet stays with trusted caregivers.",
+    "durationMins": 1440,
+    "startingPrice": 65,
+    "includes": [
+      "24/7 supervision",
+      "Daily walks",
+      "Photo updates",
+      "Medication administration"
+    ],
+    "isActive": true,
+    "sortOrder": 5,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "category": "Training",
+    "title": "Professional Training",
+    "description": "Expert trainers work with your pet at home. Basic obedience to advanced commands.",
+    "durationMins": 60,
+    "startingPrice": 90,
+    "includes": [
+      "Personalized plan",
+      "Progress reports",
+      "Owner training",
+      "Follow-up sessions"
+    ],
+    "isActive": true,
+    "sortOrder": 6,
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  }
+]

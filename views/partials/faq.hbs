@@ -1,0 +1,169 @@
+<section class="py-20 bg-white dark:bg-gray-900" x-data="{ openIndex: null }">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Frequently Asked Questions</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        Everything you need to know about our services
+      </p>
+    </div>
+    
+    <div class="max-w-3xl mx-auto space-y-4">
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+        <button @click="openIndex = openIndex === 0 ? null : 0" 
+                class="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                aria-expanded="false"
+                :aria-expanded="openIndex === 0">
+          <span class="font-semibold text-gray-900 dark:text-white">How do I book a service?</span>
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" 
+               :class="openIndex === 0 ? 'rotate-180' : ''" 
+               fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="openIndex === 0" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 max-h-0"
+             x-transition:enter-end="opacity-100 max-h-96"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 max-h-96"
+             x-transition:leave-end="opacity-0 max-h-0"
+             class="overflow-hidden">
+          <div class="px-6 pb-5 text-gray-600 dark:text-gray-400">
+            Simply visit our booking page, select your desired service, choose a date and time that works for you, and provide your pet's details. You'll receive a confirmation email within minutes.
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+        <button @click="openIndex = openIndex === 1 ? null : 1" 
+                class="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                aria-expanded="false"
+                :aria-expanded="openIndex === 1">
+          <span class="font-semibold text-gray-900 dark:text-white">Are your caregivers certified and insured?</span>
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" 
+               :class="openIndex === 1 ? 'rotate-180' : ''" 
+               fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="openIndex === 1" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 max-h-0"
+             x-transition:enter-end="opacity-100 max-h-96"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 max-h-96"
+             x-transition:leave-end="opacity-0 max-h-0"
+             class="overflow-hidden">
+          <div class="px-6 pb-5 text-gray-600 dark:text-gray-400">
+            Yes! All our caregivers are thoroughly background checked, certified in their respective fields, and fully insured. We maintain the highest standards of professionalism and safety.
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+        <button @click="openIndex = openIndex === 2 ? null : 2" 
+                class="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                aria-expanded="false"
+                :aria-expanded="openIndex === 2">
+          <span class="font-semibold text-gray-900 dark:text-white">What areas do you serve?</span>
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" 
+               :class="openIndex === 2 ? 'rotate-180' : ''" 
+               fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="openIndex === 2" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 max-h-0"
+             x-transition:enter-end="opacity-100 max-h-96"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 max-h-96"
+             x-transition:leave-end="opacity-0 max-h-0"
+             class="overflow-hidden">
+          <div class="px-6 pb-5 text-gray-600 dark:text-gray-400">
+            We currently serve the San Francisco Bay Area including San Francisco, Oakland, Berkeley, San Jose, and surrounding cities. Check our About page for a complete list of service areas.
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+        <button @click="openIndex = openIndex === 3 ? null : 3" 
+                class="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                aria-expanded="false"
+                :aria-expanded="openIndex === 3">
+          <span class="font-semibold text-gray-900 dark:text-white">Can I cancel or reschedule my appointment?</span>
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" 
+               :class="openIndex === 3 ? 'rotate-180' : ''" 
+               fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="openIndex === 3" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 max-h-0"
+             x-transition:enter-end="opacity-100 max-h-96"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 max-h-96"
+             x-transition:leave-end="opacity-0 max-h-0"
+             class="overflow-hidden">
+          <div class="px-6 pb-5 text-gray-600 dark:text-gray-400">
+            Absolutely! You can cancel or reschedule your appointment up to 24 hours before the scheduled time at no charge. Cancellations within 24 hours may incur a small fee. Contact us via email or phone to make changes.
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+        <button @click="openIndex = openIndex === 4 ? null : 4" 
+                class="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                aria-expanded="false"
+                :aria-expanded="openIndex === 4">
+          <span class="font-semibold text-gray-900 dark:text-white">Do you offer services for cats as well as dogs?</span>
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" 
+               :class="openIndex === 4 ? 'rotate-180' : ''" 
+               fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="openIndex === 4" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 max-h-0"
+             x-transition:enter-end="opacity-100 max-h-96"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 max-h-96"
+             x-transition:leave-end="opacity-0 max-h-0"
+             class="overflow-hidden">
+          <div class="px-6 pb-5 text-gray-600 dark:text-gray-400">
+            Yes! We provide services for both cats and dogs. While some services like walking are primarily for dogs, grooming, vaccination, food delivery, boarding, and training are available for both cats and dogs.
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+        <button @click="openIndex = openIndex === 5 ? null : 5" 
+                class="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                aria-expanded="false"
+                :aria-expanded="openIndex === 5">
+          <span class="font-semibold text-gray-900 dark:text-white">What payment methods do you accept?</span>
+          <svg class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform" 
+               :class="openIndex === 5 ? 'rotate-180' : ''" 
+               fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="openIndex === 5" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 max-h-0"
+             x-transition:enter-end="opacity-100 max-h-96"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 max-h-96"
+             x-transition:leave-end="opacity-0 max-h-0"
+             class="overflow-hidden">
+          <div class="px-6 pb-5 text-gray-600 dark:text-gray-400">
+            We accept all major credit cards, debit cards, and digital payment methods including PayPal, Apple Pay, and Google Pay. Payment is processed securely at the time of booking.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

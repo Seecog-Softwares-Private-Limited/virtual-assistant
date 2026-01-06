@@ -1,0 +1,115 @@
+<section class="py-12 bg-gray-50 dark:bg-gray-800">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Packages & Pricing</h1>
+      <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        Choose the perfect plan for your pet's needs. All plans include priority booking and member discounts.
+      </p>
+    </div>
+    
+    <!-- Pricing Cards -->
+    <div class="grid md:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto">
+      {{#each packages}}
+        <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-2 {{#if popular}}border-purple-500{{else}}border-gray-200 dark:border-gray-700{{/if}} relative">
+          {{#if popular}}
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-4 py-1 rounded-full">
+              MOST POPULAR
+            </div>
+          {{/if}}
+          <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">{{name}}</h3>
+            <div class="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-1">
+              ₹{{price}}<span class="text-lg text-gray-500 dark:text-gray-400">/{{period}}</span>
+            </div>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">{{description}}</p>
+          </div>
+          <ul class="space-y-3 mb-8">
+            {{#each features}}
+              <li class="flex items-start">
+                <svg class="w-5 h-5 mr-3 mt-0.5 text-purple-600 dark:text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-700 dark:text-gray-300">{{this}}</span>
+              </li>
+            {{/each}}
+          </ul>
+          <a href="/booking?package={{name}}" class="btn-primary w-full text-center {{#if popular}}bg-gradient-to-r from-purple-600 to-pink-600{{/if}}">
+            Choose {{name}}
+          </a>
+        </div>
+      {{/each}}
+    </div>
+    
+    <!-- Comparison Table -->
+    <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg mb-16 max-w-6xl mx-auto overflow-x-auto">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">Plan Comparison</h2>
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-gray-200 dark:border-gray-700">
+            <th class="text-left py-4 px-4 font-semibold text-gray-900 dark:text-white">Feature</th>
+            <th class="text-center py-4 px-4 font-semibold text-gray-900 dark:text-white">Silver</th>
+            <th class="text-center py-4 px-4 font-semibold text-gray-900 dark:text-white">Gold</th>
+            <th class="text-center py-4 px-4 font-semibold text-gray-900 dark:text-white">Platinum</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-100 dark:border-gray-800">
+            <td class="py-4 px-4 text-gray-700 dark:text-gray-300">Grooming Visits</td>
+            <td class="py-4 px-4 text-center">2/month</td>
+            <td class="py-4 px-4 text-center">4/month</td>
+            <td class="py-4 px-4 text-center font-semibold text-purple-600 dark:text-purple-400">Unlimited</td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-gray-800">
+            <td class="py-4 px-4 text-gray-700 dark:text-gray-300">Walk Credits</td>
+            <td class="py-4 px-4 text-center">4</td>
+            <td class="py-4 px-4 text-center">8</td>
+            <td class="py-4 px-4 text-center font-semibold text-purple-600 dark:text-purple-400">Unlimited</td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-gray-800">
+            <td class="py-4 px-4 text-gray-700 dark:text-gray-300">Delivery Discount</td>
+            <td class="py-4 px-4 text-center">5%</td>
+            <td class="py-4 px-4 text-center">10%</td>
+            <td class="py-4 px-4 text-center font-semibold text-purple-600 dark:text-purple-400">20%</td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-gray-800">
+            <td class="py-4 px-4 text-gray-700 dark:text-gray-300">Support</td>
+            <td class="py-4 px-4 text-center">Email</td>
+            <td class="py-4 px-4 text-center">Priority</td>
+            <td class="py-4 px-4 text-center font-semibold text-purple-600 dark:text-purple-400">24/7 Priority</td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-gray-800">
+            <td class="py-4 px-4 text-gray-700 dark:text-gray-300">Vet Hotline</td>
+            <td class="py-4 px-4 text-center">—</td>
+            <td class="py-4 px-4 text-center">✓</td>
+            <td class="py-4 px-4 text-center font-semibold text-purple-600 dark:text-purple-400">Free Consultations</td>
+          </tr>
+          <tr>
+            <td class="py-4 px-4 text-gray-700 dark:text-gray-300">Training Sessions</td>
+            <td class="py-4 px-4 text-center">—</td>
+            <td class="py-4 px-4 text-center">Discount</td>
+            <td class="py-4 px-4 text-center font-semibold text-purple-600 dark:text-purple-400">Free</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Add-ons Section -->
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Add-On Services</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {{#each addOns}}
+          <div class="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700 flex items-center justify-between">
+            <div>
+              <h3 class="font-semibold text-gray-900 dark:text-white mb-1">{{name}}</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Available with any service</p>
+            </div>
+            <div class="text-xl font-bold text-purple-600 dark:text-purple-400">
+              ₹{{price}}
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</section>
+
