@@ -1,21 +1,126 @@
-<section class="py-20 bg-white dark:bg-gray-900">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<section class="relative py-24 bg-gray-50 mt-50">
+
+  <div class="container mx-auto px-6 pt-32">
+
+
+    <!-- Section Header -->
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Services</h2>
-      <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-        Comprehensive pet care services delivered to your home
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        Virtual Assistant Services
+      </h2>
+
+      <p class="text-gray-600 text-lg max-w-3xl mx-auto">
+        Flexible, reliable, and cost-effective remote support tailored to your business needs.
       </p>
-    </div>
     
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {{#each services}}
-        {{> serviceCard}}
-      {{/each}}
+      <a
+        href="/services"
+        class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-2 rounded-full text-lg font-semibold transition mt-8 inline-block">
+        Explore All Services
+      </a>
+
     </div>
-    
-    <div class="text-center mt-12">
-      <a href="/services" class="btn-secondary">View All Services</a>
+
+    <!-- Services Grid -->
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+
+      <!-- Card 1 -->
+      <div class="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition">
+        <div class="w-12 h-12 mb-6 flex items-center justify-center rounded-full bg-purple-100 text-purple-600">
+          <!-- Icon -->
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              d="M8 7V3m8 4V3M3 11h18M5 19h14a2 2 0 002-2V7H3v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+          Administrative Support
+        </h3>
+        <p class="text-gray-600">
+          Email handling, scheduling, data entry, document management, and daily admin tasks.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition">
+        <div class="w-12 h-12 mb-6 flex items-center justify-center rounded-full bg-purple-100 text-purple-600">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              d="M18 10c0-3.866-3.582-7-8-7S2 6.134 2 10v4c0 1.657 1.343 3 3 3h1v-7H5m13 7h1c1.657 0 3-1.343 3-3v-4"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+          Customer Support
+        </h3>
+        <p class="text-gray-600">
+          Live chat, email support, CRM handling, follow-ups, and customer engagement.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition">
+        <div class="w-12 h-12 mb-6 flex items-center justify-center rounded-full bg-purple-100 text-purple-600">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              d="M11 5h6M11 9h6M11 13h6M5 5h.01M5 9h.01M5 13h.01"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+          Digital Marketing
+        </h3>
+        <p class="text-gray-600">
+          Social media management, content posting, ad support, and brand growth.
+        </p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition">
+        <div class="w-12 h-12 mb-6 flex items-center justify-center rounded-full bg-purple-100 text-purple-600">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              d="M12 8c-3.866 0-7 1.79-7 4v4h14v-4c0-2.21-3.134-4-7-4z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+          Sales & Lead Generation
+        </h3>
+        <p class="text-gray-600">
+          Cold outreach, CRM updates, pipeline management, and lead qualification.
+        </p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition">
+        <div class="w-12 h-12 mb-6 flex items-center justify-center rounded-full bg-purple-100 text-purple-600">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+          Research & Data Analysis
+        </h3>
+        <p class="text-gray-600">
+          Market research, competitor analysis, reports, and business insights.
+        </p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition">
+        <div class="w-12 h-12 mb-6 flex items-center justify-center rounded-full bg-purple-100 text-purple-600">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              d="M3 3h18l-2 13H5L3 3z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+          E-commerce Support
+        </h3>
+        <p class="text-gray-600">
+          Product uploads, order processing, inventory tracking, and store management.
+        </p>
+      </div>
+
     </div>
   </div>
 </section>
-
