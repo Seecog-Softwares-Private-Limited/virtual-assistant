@@ -1,27 +1,62 @@
-<section class="relative overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-white dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 py-20 md:py-32">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-        Premium Pet Care, Right at Your Doorstep
-      </h1>
-      <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-        Professional grooming, veterinary care, walking, and more—all in the comfort of your home. Your pet deserves the best.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/booking" class="btn-primary text-lg px-8 py-4">
-          Book a Visit
-        </a>
-        <a href="/services" class="btn-secondary text-lg px-8 py-4">
-          Explore Services
-        </a>
-      </div>
+<section class="relative min-h-screen flex items-center justify-center text-center py-8">
+  <!-- Background Image -->
+  <div class="absolute inset-0">
+  <img
+    src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+    alt="Virtual Assistant Team"
+    class="w-full h-full object-cover brightness-90"
+  />
+
+
+
+
+    <!-- Dark overlay for better text contrast -->
+    <div class="absolute inset-0 bg-black/20"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-4xl px-6 pt-24">
+    <!-- Heading -->
+    <h1
+  class="text-4xl md:text-6xl font-extrabold mb-6 text-white bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent drop-shadow-lg">
+  Hire Expert Virtual Assistants
+  <br class="hidden md:block" />
+  For Your Business Growth
+</h1>
+
+    <!-- Subtitle + Buttons Wrapper -->
+<div class="relative z-10 h-full flex flex-col">
+
+  <!-- Spacer pushes content down -->
+  <div class="flex-1"></div>
+
+  <!-- Bottom Content -->
+  <div class="pb-20 px-6 text-center">
+    <div class="flex-1 flex items-end justify-center pb-20">
+  <p class="text-lg md:text-xl text-white font-semibold max-w-2xl mx-auto text-center">
+    Delegate admin, marketing, sales, support & research tasks to skilled
+    virtual assistants worldwide.
+  </p>
+</div>
+
+
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      {{!-- <a
+        href="/services"
+        class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition">
+        Explore Services
+      </a> --}}
+
+      <a
+        href="/booking"
+        class="bg-white text-purple-600 hover:bg-gray-100 px-8 py-3 rounded-full text-lg font-semibold transition">
+        Hire a VA
+      </a>
     </div>
   </div>
-  <!-- Decorative elements -->
-  <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-    <div class="absolute top-20 left-10 w-72 h-72 bg-purple-300 dark:bg-purple-800 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-30 animate-blob"></div>
-    <div class="absolute top-40 right-10 w-72 h-72 bg-pink-300 dark:bg-pink-800 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
-    <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-blue-300 dark:bg-blue-800 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
-  </div>
-</section>
 
+</div>
+
+
+</section>

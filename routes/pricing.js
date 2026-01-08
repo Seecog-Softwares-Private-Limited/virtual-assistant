@@ -3,11 +3,12 @@ const router = express.Router();
 const { findActive, parseFeatures } = require('../repositories/pricing');
 
 const addOns = [
-  { name: 'Tick & Flea Treatment', price: 25 },
-  { name: 'De-shedding Treatment', price: 30 },
-  { name: 'Nail Trim Only', price: 15 },
-  { name: 'Pickup & Drop Service', price: 20 }
+  { name: 'Extra VA Hours (10 hrs)', price: 25 },
+  { name: 'Dedicated VA Assignment', price: 30 },
+  { name: 'Weekend / After-Hours Support', price: 15 },
+  { name: 'Priority Task Turnaround', price: 20 }
 ];
+
 
 router.get('/', async (req, res) => {
   try {

@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     }
 
     res.render('pages/services', {
-      title: 'Our Services - Stella Pet Services',
+      title: 'Our Services - Virtual Assistant',
       description: 'Browse our comprehensive pet care services including grooming, walking, vaccination, food delivery, boarding, and training.',
       services,
       categories,
@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
   } catch (error) {
     console.error('Services page error:', error);
     res.render('pages/services', {
-      title: 'Our Services - Stella Pet Services',
+      title: 'Our Services - Virtual Assistant',
       description: 'Browse our comprehensive pet care services.',
       services: [],
       categories,

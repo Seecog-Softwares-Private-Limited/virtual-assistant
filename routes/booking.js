@@ -4,58 +4,75 @@ const { body, validationResult } = require('express-validator');
 const { findActive, parseIncludes } = require('../repositories/services');
 const { create: createBooking } = require('../repositories/bookings');
 
+/**
+ * GET – Booking Page
+ */
 router.get('/', async (req, res) => {
   try {
     const services = await findActive();
-    const servicesWithIncludes = services.map(parseIncludes);
-    
+
+    // Normalize services for frontend
+    const servicesForView = services.map(service => {
+  const parsed = parseIncludes(service);
+  return {
+    id: parsed.id,
+    title: parsed.title,   // ✅ correct column
+    includes: parsed.includes || []
+  };
+});
+
+
     res.render('pages/booking', {
-      title: 'Book a Service - Stella Pet Services',
-      description: 'Book your pet care service with Stella. Choose from grooming, walking, vaccination, and more.',
-      services: servicesWithIncludes,
+      title: 'Hire a Virtual Assistant - VAHub',
+      description: 'Tell us your requirements and we’ll match you with the right Virtual Assistant.',
+      services: servicesForView,
       activeRoute: '/booking',
       success: false
     });
+
   } catch (error) {
     console.error('Booking page error:', error);
+
     res.render('pages/booking', {
-      title: 'Book a Service - Stella Pet Services',
-      description: 'Book your pet care service with Stella.',
+      title: 'Hire a Virtual Assistant - VAHub',
+      description: 'Tell us your requirements and we’ll match you with the right Virtual Assistant.',
       services: [],
       activeRoute: '/booking',
       success: false,
-      error: 'Error loading services'
+      error: 'Unable to load services. Please try again.'
     });
   }
 });
 
-router.post('/',
+/**
+ * POST – Create Booking
+ */
+router.post(
+  '/',
   [
     body('contactName').trim().notEmpty().withMessage('Name is required'),
     body('email').isEmail().normalizeEmail().withMessage('Valid email is required'),
-    body('phone').trim().notEmpty().withMessage('Phone is required'),
-    body('petName').trim().notEmpty().withMessage('Pet name is required'),
-    body('petBreed').trim().notEmpty().withMessage('Pet breed is required'),
-    body('petAge').trim().notEmpty().withMessage('Pet age is required'),
-    body('address').trim().notEmpty().withMessage('Address is required'),
-    body('city').trim().notEmpty().withMessage('City is required'),
-    body('zipCode').trim().notEmpty().withMessage('ZIP code is required'),
-    body('preferredDate').isISO8601().withMessage('Valid date is required'),
-    body('preferredTime').trim().notEmpty().withMessage('Time is required'),
-    body('service').trim().notEmpty().withMessage('Service is required')
+    body('phone').trim().notEmpty().withMessage('Phone number is required'),
+    body('service').trim().notEmpty().withMessage('Service selection is required'),
+    body('preferredDate').notEmpty().withMessage('Start date is required'),
+    body('preferredTime').notEmpty().withMessage('Preferred time is required')
   ],
   async (req, res) => {
     const errors = validationResult(req);
-    
+
     try {
       const services = await findActive();
-      const servicesWithIncludes = services.map(parseIncludes);
-      
+      const servicesForView = services.map(service => ({
+        id: service.id,
+        name: service.name,
+        includes: parseIncludes(service).includes || []
+      }));
+
       if (!errors.isEmpty()) {
         return res.render('pages/booking', {
-          title: 'Book a Service - Stella Pet Services',
-          description: 'Book your pet care service with Stella.',
-          services: servicesWithIncludes,
+          title: 'Hire a Virtual Assistant - VAHub',
+          description: 'Tell us your requirements and we’ll match you with the right Virtual Assistant.',
+          services: servicesForView,
           activeRoute: '/booking',
           success: false,
           error: errors.array()[0].msg
@@ -63,49 +80,59 @@ router.post('/',
       }
 
       const bookingData = {
-        userId: req.session.userId || null, // Associate with logged-in user if available
+        userId: req.session.userId || null,
+
+        // Contact
         customerName: req.body.contactName.trim(),
-        phone: req.body.phone.trim(),
         email: req.body.email.trim(),
-        address: req.body.address.trim(),
-        addressLine2: req.body.addressLine2?.trim() || null,
-        city: req.body.city.trim(),
-        state: req.body.state?.trim() || '',
-        zipCode: req.body.zipCode.trim(),
-        serviceId: req.body.serviceId ? parseInt(req.body.serviceId, 10) : null,
+        phone: req.body.phone.trim(),
+
+        // Service
+        serviceId: req.body.serviceId ? Number(req.body.serviceId) : null,
         serviceTitle: req.body.service.trim(),
+        package: req.body.package || null,
+
+        // Schedule
         preferredDate: req.body.preferredDate,
-        preferredTime: req.body.preferredTime.trim(),
-        petType: req.body.petType?.trim() || null,
-        petBreed: req.body.petBreed.trim(),
-        petAge: req.body.petAge.trim(),
+        preferredTime: req.body.preferredTime,
+
+        // Extra VA details
+        workScope: req.body.workScope?.trim() || null,
         notes: req.body.notes?.trim() || null,
+
         status: 'New'
       };
 
       const savedBooking = await createBooking(bookingData);
-      console.log('📅 New Booking:', JSON.stringify(savedBooking, null, 2));
+
+      console.log('📌 New VA Booking:', savedBooking);
 
       res.render('pages/booking', {
-        title: 'Booking Confirmed - Stella Pet Services',
-        description: 'Your booking has been confirmed.',
-        services: servicesWithIncludes,
+        title: 'Booking Confirmed - VAHub',
+        description: 'Your Virtual Assistant request has been successfully submitted.',
+        services: servicesForView,
         activeRoute: '/booking',
         success: true,
         booking: savedBooking
       });
+
     } catch (error) {
-      console.error('Booking error:', error);
+      console.error('Booking submission error:', error);
+
       const services = await findActive().catch(() => []);
-      const servicesWithIncludes = services.map(parseIncludes);
-      
+      const servicesForView = services.map(service => ({
+        id: service.id,
+        name: service.name,
+        includes: parseIncludes(service).includes || []
+      }));
+
       res.render('pages/booking', {
-        title: 'Book a Service - Stella Pet Services',
-        description: 'Book your pet care service with Stella.',
-        services: servicesWithIncludes,
+        title: 'Hire a Virtual Assistant - VAHub',
+        description: 'Tell us your requirements and we’ll match you with the right Virtual Assistant.',
+        services: servicesForView,
         activeRoute: '/booking',
         success: false,
-        error: 'An error occurred. Please try again.'
+        error: 'Something went wrong. Please try again.'
       });
     }
   }

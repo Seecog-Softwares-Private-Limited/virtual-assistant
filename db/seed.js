@@ -27,239 +27,154 @@ async function seed() {
     console.log('✅ Seeded admin user: admin@stellapetservices.com (password: admin123)');
 
     // Seed services (idempotent: check if exists, then insert or update)
-    const services = [
-      // Grooming Services
-      {
-        category: 'Grooming',
-        title: 'Professional Grooming',
-        description: 'Full-service grooming at your home. Includes bath, brush, nail trim, ear cleaning, and styling.',
-        duration_mins: 120,
-        starting_price: 75.00,
-        includes_json: JSON.stringify(['Bath & dry', 'Haircut & styling', 'Nail trimming', 'Ear cleaning', 'Sanitary trim']),
-        is_active: 1,
-        sort_order: 1
-      },
-      {
-        category: 'Grooming',
-        title: 'Express Grooming',
-        description: 'Quick grooming service perfect for busy schedules. Includes bath, nail trim, and basic styling.',
-        duration_mins: 60,
-        starting_price: 45.00,
-        includes_json: JSON.stringify(['Bath & dry', 'Nail trimming', 'Ear cleaning', 'Basic styling']),
-        is_active: 1,
-        sort_order: 2
-      },
-      {
-        category: 'Grooming',
-        title: 'Deluxe Spa Package',
-        description: 'Premium spa experience including aromatherapy bath, deep conditioning, paw massage, and styling.',
-        duration_mins: 150,
-        starting_price: 120.00,
-        includes_json: JSON.stringify(['Aromatherapy bath', 'Deep conditioning', 'Paw massage', 'Full styling', 'Nail polish']),
-        is_active: 1,
-        sort_order: 3
-      },
-      {
-        category: 'Grooming',
-        title: 'Puppy First Groom',
-        description: 'Gentle introduction to grooming for puppies. Includes bath, light trim, and positive reinforcement.',
-        duration_mins: 45,
-        starting_price: 55.00,
-        includes_json: JSON.stringify(['Gentle bath', 'Light trim', 'Nail filing', 'Positive reinforcement', 'Owner education']),
-        is_active: 1,
-        sort_order: 4
-      },
-      
-      // Walking Services
-      {
-        category: 'Walking',
-        title: 'Dog Walking',
-        description: 'Regular walks to keep your pet healthy and happy. Flexible scheduling for your busy lifestyle.',
-        duration_mins: 30,
-        starting_price: 25.00,
-        includes_json: JSON.stringify(['GPS tracking', 'Photo updates', 'Water provided', 'Exercise report']),
-        is_active: 1,
-        sort_order: 5
-      },
-      {
-        category: 'Walking',
-        title: 'Extended Walk',
-        description: 'Longer walks for high-energy dogs. Perfect for active breeds that need extra exercise.',
-        duration_mins: 60,
-        starting_price: 40.00,
-        includes_json: JSON.stringify(['GPS tracking', 'Photo updates', 'Water provided', 'Extended exercise report']),
-        is_active: 1,
-        sort_order: 6
-      },
-      {
-        category: 'Walking',
-        title: 'Group Walk',
-        description: 'Social walking experience with other friendly dogs. Great for socialization and exercise.',
-        duration_mins: 45,
-        starting_price: 30.00,
-        includes_json: JSON.stringify(['Group socialization', 'GPS tracking', 'Photo updates', 'Socialization report']),
-        is_active: 1,
-        sort_order: 7
-      },
-      {
-        category: 'Walking',
-        title: 'Senior Dog Walk',
-        description: 'Gentle, slower-paced walks designed for senior dogs with mobility considerations.',
-        duration_mins: 25,
-        starting_price: 28.00,
-        includes_json: JSON.stringify(['Gentle pace', 'Mobility support', 'Photo updates', 'Health monitoring']),
-        is_active: 1,
-        sort_order: 8
-      },
-      
-      // Vet/Vaccination Services
-      {
-        category: 'Vet/Vaccination',
-        title: 'At-Home Vaccination',
-        description: 'Licensed veterinarians come to your home for vaccinations and health checkups.',
-        duration_mins: 30,
-        starting_price: 120.00,
-        includes_json: JSON.stringify(['Vaccination', 'Health checkup', 'Certificate', 'Follow-up care']),
-        is_active: 1,
-        sort_order: 9
-      },
-      {
-        category: 'Vet/Vaccination',
-        title: 'Health Checkup',
-        description: 'Comprehensive health examination by licensed veterinarians at your home.',
-        duration_mins: 45,
-        starting_price: 150.00,
-        includes_json: JSON.stringify(['Full physical exam', 'Health report', 'Vaccination recommendations', 'Diet consultation']),
-        is_active: 1,
-        sort_order: 10
-      },
-      {
-        category: 'Vet/Vaccination',
-        title: 'Emergency Vet Visit',
-        description: 'Urgent veterinary care at your home for non-life-threatening emergencies.',
-        duration_mins: 60,
-        starting_price: 200.00,
-        includes_json: JSON.stringify(['Emergency examination', 'Basic treatment', 'Medication administration', 'Follow-up instructions']),
-        is_active: 1,
-        sort_order: 11
-      },
-      {
-        category: 'Vet/Vaccination',
-        title: 'Dental Cleaning',
-        description: 'Professional dental cleaning and oral health checkup at your home.',
-        duration_mins: 40,
-        starting_price: 180.00,
-        includes_json: JSON.stringify(['Dental cleaning', 'Oral exam', 'Teeth polishing', 'Dental health tips']),
-        is_active: 1,
-        sort_order: 12
-      },
-      
-      // Food Delivery Services
-      {
-        category: 'Food Delivery',
-        title: 'Premium Food Delivery',
-        description: 'Fresh, premium pet food delivered to your door. Customized meal plans available.',
-        duration_mins: 0,
-        starting_price: 45.00,
-        includes_json: JSON.stringify(['Free delivery', 'Meal planning', 'Nutritional guidance', 'Auto-refill option']),
-        is_active: 1,
-        sort_order: 13
-      },
-      {
-        category: 'Food Delivery',
-        title: 'Special Diet Delivery',
-        description: 'Specialized diets for pets with allergies, weight management, or medical conditions.',
-        duration_mins: 0,
-        starting_price: 65.00,
-        includes_json: JSON.stringify(['Free delivery', 'Custom meal plan', 'Veterinary consultation', 'Monthly adjustments']),
-        is_active: 1,
-        sort_order: 14
-      },
-      {
-        category: 'Food Delivery',
-        title: 'Raw Food Delivery',
-        description: 'Premium raw food diet options delivered fresh to your door.',
-        duration_mins: 0,
-        starting_price: 85.00,
-        includes_json: JSON.stringify(['Fresh raw food', 'Free delivery', 'Nutritional consultation', 'Storage guidance']),
-        is_active: 1,
-        sort_order: 15
-      },
-      
-      // Shelter/Boarding Services
-      {
-        category: 'Shelter/Boarding',
-        title: 'Home Boarding',
-        description: 'Safe, comfortable boarding in a home environment. Your pet stays with trusted caregivers.',
-        duration_mins: 1440,
-        starting_price: 65.00,
-        includes_json: JSON.stringify(['24/7 supervision', 'Daily walks', 'Photo updates', 'Medication administration']),
-        is_active: 1,
-        sort_order: 16
-      },
-      {
-        category: 'Shelter/Boarding',
-        title: 'Premium Boarding',
-        description: 'Luxury boarding experience with private suites, playtime, and premium care.',
-        duration_mins: 1440,
-        starting_price: 95.00,
-        includes_json: JSON.stringify(['Private suite', '24/7 supervision', 'Multiple daily walks', 'Photo/video updates', 'Premium meals']),
-        is_active: 1,
-        sort_order: 17
-      },
-      {
-        category: 'Shelter/Boarding',
-        title: 'Daycare Service',
-        description: 'Daytime care and socialization for your pet while you\'re at work.',
-        duration_mins: 480,
-        starting_price: 45.00,
-        includes_json: JSON.stringify(['Daytime supervision', 'Playtime', 'Socialization', 'Photo updates', 'Meal service']),
-        is_active: 1,
-        sort_order: 18
-      },
-      
-      // Training Services
-      {
-        category: 'Training',
-        title: 'Professional Training',
-        description: 'Expert trainers work with your pet at home. Basic obedience to advanced commands.',
-        duration_mins: 60,
-        starting_price: 90.00,
-        includes_json: JSON.stringify(['Personalized plan', 'Progress reports', 'Owner training', 'Follow-up sessions']),
-        is_active: 1,
-        sort_order: 19
-      },
-      {
-        category: 'Training',
-        title: 'Puppy Training',
-        description: 'Specialized training program for puppies focusing on socialization and basic commands.',
-        duration_mins: 45,
-        starting_price: 75.00,
-        includes_json: JSON.stringify(['Socialization training', 'Basic commands', 'Potty training', 'Owner guidance']),
-        is_active: 1,
-        sort_order: 20
-      },
-      {
-        category: 'Training',
-        title: 'Behavioral Modification',
-        description: 'Addressing behavioral issues like aggression, anxiety, or destructive behavior.',
-        duration_mins: 90,
-        starting_price: 120.00,
-        includes_json: JSON.stringify(['Behavior assessment', 'Customized plan', 'Owner training', 'Progress tracking']),
-        is_active: 1,
-        sort_order: 21
-      },
-      {
-        category: 'Training',
-        title: 'Agility Training',
-        description: 'Fun and challenging agility training to keep your dog active and engaged.',
-        duration_mins: 60,
-        starting_price: 100.00,
-        includes_json: JSON.stringify(['Agility course', 'Skill building', 'Fitness training', 'Progress videos']),
-        is_active: 1,
-        sort_order: 22
-      }
-    ];
+    // Seed services (Virtual Assistant services)
+const services = [
+  {
+    category: 'Administrative',
+    title: 'Administrative Support',
+    description: 'Email handling, scheduling, data entry, document management, and day-to-day admin tasks.',
+    duration_mins: 480,
+    starting_price: 15.00,
+    includes_json: JSON.stringify([
+      'Email & calendar management',
+      'Data entry',
+      'Document preparation',
+      'Meeting scheduling',
+      'Task coordination'
+    ]),
+    is_active: 1,
+    sort_order: 1
+  },
+  {
+    category: 'Customer Support',
+    title: 'Customer Support',
+    description: 'Professional customer support via email, chat, and CRM tools.',
+    duration_mins: 480,
+    starting_price: 18.00,
+    includes_json: JSON.stringify([
+      'Live chat support',
+      'Email support',
+      'CRM handling',
+      'Customer follow-ups',
+      'Issue resolution'
+    ]),
+    is_active: 1,
+    sort_order: 2
+  },
+  {
+    category: 'Marketing',
+    title: 'Digital Marketing',
+    description: 'Marketing support to grow your brand and online presence.',
+    duration_mins: 480,
+    starting_price: 20.00,
+    includes_json: JSON.stringify([
+      'Social media posting',
+      'Content scheduling',
+      'Ad campaign support',
+      'Analytics reporting',
+      'Brand engagement'
+    ]),
+    is_active: 1,
+    sort_order: 3
+  },
+  {
+    category: 'Sales',
+    title: 'Sales & Lead Generation',
+    description: 'Support for lead generation, outreach, and sales pipeline management.',
+    duration_mins: 480,
+    starting_price: 22.00,
+    includes_json: JSON.stringify([
+      'Cold outreach',
+      'Lead qualification',
+      'CRM updates',
+      'Pipeline tracking',
+      'Sales reports'
+    ]),
+    is_active: 1,
+    sort_order: 4
+  },
+  {
+    category: 'Research',
+    title: 'Research & Data Analysis',
+    description: 'Market research, competitor analysis, and data reporting services.',
+    duration_mins: 480,
+    starting_price: 20.00,
+    includes_json: JSON.stringify([
+      'Market research',
+      'Competitor analysis',
+      'Data collection',
+      'Excel/Sheets reports',
+      'Insights & summaries'
+    ]),
+    is_active: 1,
+    sort_order: 5
+  },
+  {
+    category: 'E-commerce',
+    title: 'E-commerce Support',
+    description: 'Operational support for online stores and marketplaces.',
+    duration_mins: 480,
+    starting_price: 18.00,
+    includes_json: JSON.stringify([
+      'Product uploads',
+      'Order processing',
+      'Inventory management',
+      'Customer queries',
+      'Platform support (Shopify, Amazon)'
+    ]),
+    is_active: 1,
+    sort_order: 6
+  },
+  {
+    category: 'Finance',
+    title: 'Bookkeeping & Accounting',
+    description: 'Basic bookkeeping and financial record management.',
+    duration_mins: 480,
+    starting_price: 25.00,
+    includes_json: JSON.stringify([
+      'Invoice management',
+      'Expense tracking',
+      'Bank reconciliation',
+      'QuickBooks/Xero support',
+      'Monthly reports'
+    ]),
+    is_active: 1,
+    sort_order: 7
+  },
+  {
+    category: 'HR',
+    title: 'HR & Recruitment Support',
+    description: 'Hiring assistance and HR operational support.',
+    duration_mins: 480,
+    starting_price: 24.00,
+    includes_json: JSON.stringify([
+      'Resume screening',
+      'Interview scheduling',
+      'Candidate coordination',
+      'HR documentation',
+      'Onboarding support'
+    ]),
+    is_active: 1,
+    sort_order: 8
+  },
+  {
+    category: 'Tech',
+    title: 'IT & Tech Support',
+    description: 'Technical support for tools, systems, and basic troubleshooting.',
+    duration_mins: 480,
+    starting_price: 30.00,
+    includes_json: JSON.stringify([
+      'Tool setup',
+      'Tech troubleshooting',
+      'Website updates',
+      'CMS support',
+      'Basic automation'
+    ]),
+    is_active: 1,
+    sort_order: 9
+  }
+];
+
 
     for (const service of services) {
       // Check if service exists (idempotent)
