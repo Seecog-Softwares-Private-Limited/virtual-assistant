@@ -3,11 +3,11 @@ const config = require('../config/env');
 
 async function migrate() {
   let connection;
-  
+
   try {
     console.log('🔄 Starting database migration...');
     console.log(`📊 Database: ${config.db.database}@${config.db.host}:${config.db.port}`);
-    
+
     // Connect without database first to create it if needed
     connection = await mysql.createConnection({
       host: config.db.host,
@@ -19,9 +19,9 @@ async function migrate() {
     // Create database if it doesn't exist
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${config.db.database}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`);
     console.log(`✅ Database '${config.db.database}' ready`);
-    
+
     await connection.end();
-    
+
     // Connect to the database
     connection = await mysql.createConnection({
       host: config.db.host,
@@ -49,7 +49,7 @@ async function migrate() {
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(120) NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
-        password_hash VARCHAR(255) NOT NULL,
+        password_hash VARCHAR(255) NULL,
         phone VARCHAR(30) NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -57,6 +57,23 @@ async function migrate() {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `);
     console.log('✅ Table: users');
+
+    // Create user_identities table (for SSO mapping)
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS user_identities (
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        user_id BIGINT NOT NULL,
+        provider VARCHAR(30) NOT NULL,              -- 'google' | 'facebook'
+        provider_user_id VARCHAR(191) NOT NULL,     -- google profile id / fb id
+        email VARCHAR(255) NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE KEY uniq_provider_user (provider, provider_user_id),
+        INDEX idx_user_id (user_id),
+        CONSTRAINT fk_ui_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `);
+    console.log('✅ Table: user_identities');
+
 
     // Create services table
     await connection.query(`
@@ -142,7 +159,7 @@ async function migrate() {
         AND TABLE_NAME = 'bookings' 
         AND COLUMN_NAME = 'user_id'
       `, [config.db.database]);
-      
+
       if (columns.length === 0) {
         await connection.query(`
           ALTER TABLE bookings 
@@ -167,7 +184,7 @@ async function migrate() {
 
     await connection.end();
     console.log('\n✅ Migration completed successfully!\n');
-    
+
   } catch (error) {
     console.error('\n❌ Migration error:', error.message);
     console.error('Stack:', error.stack);
