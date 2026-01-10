@@ -39,7 +39,7 @@ function checkEnvFile() {
     log('\n# For STAGING/DEVELOPMENT:');
     log('DB_HOST_STAGE=localhost');
     log('DB_PORT_STAGE=3306');
-    log('DB_NAME_STAGE=stella_pet_services_stage');
+    log('DB_NAME_STAGE=virtual_assistant_service');
     log('DB_USER_STAGE=root');
     log('DB_PASSWORD_STAGE=your_password');
     log('\n# For PRODUCTION:');
