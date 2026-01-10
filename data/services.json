@@ -1,106 +1,70 @@
 [
   {
-    "id": 1,
-    "category": "Grooming",
-    "title": "Professional Grooming",
-    "description": "Full-service grooming at your home. Includes bath, brush, nail trim, ear cleaning, and styling.",
-    "durationMins": 120,
-    "startingPrice": 44,
+    "id": 23,
+    "category": "Admin & Operations",
+    "title": "Administrative Support",
+    "description": "Email handling, scheduling, data entry, document management, and day-to-day admin tasks.",
+    "durationMins": 480,
+    "startingPrice": 15,
     "includes": [
-      "Bath & dry\r",
-      "Haircut & styling\r",
-      "Nail trimming\r",
-      "Ear cleaning\r",
-      "Sanitary trim"
+      "Email & calendar management",
+      "Data entry",
+      "Document preparation",
+      "Meeting scheduling",
+      "Task coordination"
     ],
     "isActive": true,
-    "sortOrder": 1,
-    "createdAt": "2024-01-01T00:00:00.000Z",
-    "updatedAt": "2025-12-25T11:22:26.535Z"
+    "sortOrder": 1
   },
   {
-    "id": 2,
-    "category": "Walking",
-    "title": "Dog Walking",
-    "description": "Regular walks to keep your pet healthy and happy. Flexible scheduling for your busy lifestyle.",
-    "durationMins": 30,
-    "startingPrice": 25,
+    "id": 24,
+    "category": "Customer & Sales",
+    "title": "Customer Support",
+    "description": "Professional customer support via email, chat, and CRM tools.",
+    "durationMins": 480,
+    "startingPrice": 18,
     "includes": [
-      "GPS tracking",
-      "Photo updates",
-      "Water provided",
-      "Exercise report"
+      "Live chat support",
+      "Email support",
+      "CRM handling",
+      "Customer follow-ups",
+      "Issue resolution"
     ],
     "isActive": true,
-    "sortOrder": 2,
-    "createdAt": "2024-01-01T00:00:00.000Z"
+    "sortOrder": 2
   },
   {
-    "id": 3,
-    "category": "Vet/Vaccination",
-    "title": "At-Home Vaccination",
-    "description": "Licensed veterinarians come to your home for vaccinations and health checkups.",
-    "durationMins": 30,
-    "startingPrice": 120,
+    "id": 25,
+    "category": "Marketing & Growth",
+    "title": "Digital Marketing",
+    "description": "Marketing support to grow your brand and online presence.",
+    "durationMins": 480,
+    "startingPrice": 20,
     "includes": [
-      "Vaccination",
-      "Health checkup",
-      "Certificate",
-      "Follow-up care"
+      "Social media posting",
+      "Content scheduling",
+      "Ad campaign support",
+      "Analytics reporting",
+      "Brand engagement"
     ],
     "isActive": true,
-    "sortOrder": 3,
-    "createdAt": "2024-01-01T00:00:00.000Z"
+    "sortOrder": 3
   },
   {
-    "id": 4,
-    "category": "Food Delivery",
-    "title": "Premium Food Delivery",
-    "description": "Fresh, premium pet food delivered to your door. Customized meal plans available.",
-    "durationMins": 0,
-    "startingPrice": 45,
+    "id": 26,
+    "category": "Customer & Sales",
+    "title": "Sales & Lead Generation",
+    "description": "Support for lead generation, outreach, and sales pipeline management.",
+    "durationMins": 480,
+    "startingPrice": 22,
     "includes": [
-      "Free delivery",
-      "Meal planning",
-      "Nutritional guidance",
-      "Auto-refill option"
+      "Cold outreach",
+      "Lead qualification",
+      "CRM updates",
+      "Pipeline tracking",
+      "Sales reports"
     ],
     "isActive": true,
-    "sortOrder": 4,
-    "createdAt": "2024-01-01T00:00:00.000Z"
-  },
-  {
-    "id": 5,
-    "category": "Shelter/Boarding",
-    "title": "Home Boarding",
-    "description": "Safe, comfortable boarding in a home environment. Your pet stays with trusted caregivers.",
-    "durationMins": 1440,
-    "startingPrice": 65,
-    "includes": [
-      "24/7 supervision",
-      "Daily walks",
-      "Photo updates",
-      "Medication administration"
-    ],
-    "isActive": true,
-    "sortOrder": 5,
-    "createdAt": "2024-01-01T00:00:00.000Z"
-  },
-  {
-    "id": 6,
-    "category": "Training",
-    "title": "Professional Training",
-    "description": "Expert trainers work with your pet at home. Basic obedience to advanced commands.",
-    "durationMins": 60,
-    "startingPrice": 90,
-    "includes": [
-      "Personalized plan",
-      "Progress reports",
-      "Owner training",
-      "Follow-up sessions"
-    ],
-    "isActive": true,
-    "sortOrder": 6,
-    "createdAt": "2024-01-01T00:00:00.000Z"
+    "sortOrder": 4
   }
 ]

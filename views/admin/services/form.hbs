@@ -10,15 +10,45 @@
     <div class="grid md:grid-cols-2 gap-6 mb-6">
       <div>
         <label for="category" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Category *</label>
-        <select name="category" id="category" required class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-          <option value="">Select category</option>
-          <option value="Grooming" {{#if (eq service.category 'Grooming')}}selected{{/if}}>Grooming</option>
-          <option value="Walking" {{#if (eq service.category 'Walking')}}selected{{/if}}>Walking</option>
-          <option value="Vet/Vaccination" {{#if (eq service.category 'Vet/Vaccination')}}selected{{/if}}>Vet/Vaccination</option>
-          <option value="Food Delivery" {{#if (eq service.category 'Food Delivery')}}selected{{/if}}>Food Delivery</option>
-          <option value="Shelter/Boarding" {{#if (eq service.category 'Shelter/Boarding')}}selected{{/if}}>Shelter/Boarding</option>
-          <option value="Training" {{#if (eq service.category 'Training')}}selected{{/if}}>Training</option>
-        </select>
+        <select
+  name="category"
+  id="category"
+  required
+  class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+>
+  <option value="">Select category</option>
+
+  <option value="Admin & Operations"
+    {{#if (eq service.category 'Admin & Operations')}}selected{{/if}}>
+    Admin & Operations
+  </option>
+
+  <option value="Customer & Sales"
+    {{#if (eq service.category 'Customer & Sales')}}selected{{/if}}>
+    Customer & Sales
+  </option>
+
+  <option value="Marketing & Growth"
+    {{#if (eq service.category 'Marketing & Growth')}}selected{{/if}}>
+    Marketing & Growth
+  </option>
+
+  <option value="Finance & HR"
+    {{#if (eq service.category 'Finance & HR')}}selected{{/if}}>
+    Finance & HR
+  </option>
+
+  <option value="Tech & Automation"
+    {{#if (eq service.category 'Tech & Automation')}}selected{{/if}}>
+    Tech & Automation
+  </option>
+
+  <option value="Personal Assistance"
+    {{#if (eq service.category 'Personal Assistance')}}selected{{/if}}>
+    Personal Assistance
+  </option>
+</select>
+
       </div>
       
       <div>

@@ -30,7 +30,7 @@ async function seed() {
     // Seed services (Virtual Assistant services)
 const services = [
   {
-    category: 'Administrative',
+    category: 'Admin & Operations',
     title: 'Administrative Support',
     description: 'Email handling, scheduling, data entry, document management, and day-to-day admin tasks.',
     duration_mins: 480,
@@ -46,7 +46,7 @@ const services = [
     sort_order: 1
   },
   {
-    category: 'Customer Support',
+    category: 'Customer & Sales',
     title: 'Customer Support',
     description: 'Professional customer support via email, chat, and CRM tools.',
     duration_mins: 480,
@@ -62,7 +62,7 @@ const services = [
     sort_order: 2
   },
   {
-    category: 'Marketing',
+    category: 'Marketing & Growth',
     title: 'Digital Marketing',
     description: 'Marketing support to grow your brand and online presence.',
     duration_mins: 480,
@@ -78,7 +78,7 @@ const services = [
     sort_order: 3
   },
   {
-    category: 'Sales',
+    category: 'Customer & Sales',
     title: 'Sales & Lead Generation',
     description: 'Support for lead generation, outreach, and sales pipeline management.',
     duration_mins: 480,
@@ -94,7 +94,7 @@ const services = [
     sort_order: 4
   },
   {
-    category: 'Research',
+    category: 'Marketing & Growth',
     title: 'Research & Data Analysis',
     description: 'Market research, competitor analysis, and data reporting services.',
     duration_mins: 480,
@@ -110,7 +110,7 @@ const services = [
     sort_order: 5
   },
   {
-    category: 'E-commerce',
+    category: 'Marketing & Growth',
     title: 'E-commerce Support',
     description: 'Operational support for online stores and marketplaces.',
     duration_mins: 480,
@@ -126,7 +126,7 @@ const services = [
     sort_order: 6
   },
   {
-    category: 'Finance',
+    category: 'Finance & HR',
     title: 'Bookkeeping & Accounting',
     description: 'Basic bookkeeping and financial record management.',
     duration_mins: 480,
@@ -142,7 +142,7 @@ const services = [
     sort_order: 7
   },
   {
-    category: 'HR',
+    category: 'Finance & HR',
     title: 'HR & Recruitment Support',
     description: 'Hiring assistance and HR operational support.',
     duration_mins: 480,
@@ -158,7 +158,7 @@ const services = [
     sort_order: 8
   },
   {
-    category: 'Tech',
+    category: 'Tech & Automation',
     title: 'IT & Tech Support',
     description: 'Technical support for tools, systems, and basic troubleshooting.',
     duration_mins: 480,
@@ -174,6 +174,9 @@ const services = [
     sort_order: 9
   }
 ];
+
+
+
 
 
     for (const service of services) {

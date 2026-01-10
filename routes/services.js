@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { findAll, parseIncludes } = require('../repositories/services');
 
-const categories = ['All', 'Grooming', 'Walking', 'Vet/Vaccination', 'Food Delivery', 'Shelter/Boarding', 'Training'];
+const categories = ['All', 'Admin & Operations', 'Customer & Sales', 'Marketing & Growth', 'Finance & HR', 'Tech & Automation', 'Personal Assistance'];
 
 router.get('/', async (req, res) => {
   try {
@@ -14,12 +14,13 @@ router.get('/', async (req, res) => {
     
     // Filter by category
     if (category !== 'All') {
-      services = services.filter(s => s.category === category);
-    }
+  services = services.filter(
+    s => s.category === category);
+}
 
     res.render('pages/services', {
       title: 'Our Services - Virtual Assistant',
-      description: 'Browse our comprehensive pet care services including grooming, walking, vaccination, food delivery, boarding, and training.',
+      description: 'Tell us your requirements and we’ll match you with the right Virtual Assistant.',
       services,
       categories,
       activeCategory: category,
@@ -29,7 +30,7 @@ router.get('/', async (req, res) => {
     console.error('Services page error:', error);
     res.render('pages/services', {
       title: 'Our Services - Virtual Assistant',
-      description: 'Browse our comprehensive pet care services.',
+      description: 'Tell us your requirements and we’ll match you with the right Virtual Assistant.',
       services: [],
       categories,
       activeCategory: 'All',
@@ -37,5 +38,59 @@ router.get('/', async (req, res) => {
     });
   }
 });
+
+
+
+// router.get('/', async (req, res) => {
+//   try {
+//     let category = req.query.category || 'All';
+//     let services = await findAll();
+
+//     services = services.map(parseIncludes);
+
+//     // 🔥 NORMALIZE OLD CATEGORIES → NEW UI CATEGORIES
+//     services = services.map(s => {
+//       if (['Administrative'].includes(s.category)) {
+//         s.category = 'Admin & Operations';
+//       }
+//       if (['Customer Support', 'Sales'].includes(s.category)) {
+//         s.category = 'Customer & Sales';
+//       }
+//       if (['Marketing', 'Research', 'E-commerce'].includes(s.category)) {
+//         s.category = 'Marketing & Growth';
+//       }
+//       if (['Finance', 'HR'].includes(s.category)) {
+//         s.category = 'Finance & HR';
+//       }
+//       if (['Tech'].includes(s.category)) {
+//         s.category = 'Tech & Automation';
+//       }
+//       return s;
+//     });
+
+//     // ✅ FILTER
+//     if (category !== 'All') {
+//   services = services.filter(
+//     s => s.category?.trim() === category?.trim()
+//   );
+// }
+
+//     res.render('pages/services', {
+//       title: 'Our Services - Virtual Assistant',
+//       services,
+//       categories,
+//       activeCategory: category,
+//       activeRoute: '/services'
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     res.render('pages/services', {
+//       services: [],
+//       categories,
+//       activeCategory: 'All'
+//     });
+//   }
+// });
+
 
 module.exports = router;
