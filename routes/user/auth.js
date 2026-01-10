@@ -134,12 +134,30 @@ router.post('/register',
 );
 
 // POST /logout
+// router.post('/logout', requireUserAuth, (req, res) => {
+//   req.session.destroy((err) => {
+//     if (err) {
+//       console.error('Logout error:', err);
+//     }
+//     res.redirect('/');
+//   });
+// });
+
+// POST /logout  (keep if you already use a logout form)
 router.post('/logout', requireUserAuth, (req, res) => {
+  const cookieName = process.env.SESSION_COOKIE_NAME || 'connect.sid';
+
   req.session.destroy((err) => {
     if (err) {
       console.error('Logout error:', err);
+      // req.flash('error', 'Logout failed, please try again');
+      return res.redirect('/dashboard');
     }
-    res.redirect('/');
+
+    res.clearCookie(cookieName, { path: '/' });
+
+    // req.flash('success', 'Logged out successfully');
+    return res.redirect('/');
   });
 });
 
