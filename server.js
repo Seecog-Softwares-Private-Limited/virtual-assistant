@@ -7,6 +7,8 @@ const securityMiddleware = require('./middleware/security');
 const config = require('./config/env');
 const migrate = require('./db/migrate');
 const { getPool, closePool } = require('./db/pool');
+const passport = require('passport');
+
 
 const app = express();
 const PORT = config.port;
@@ -18,32 +20,32 @@ app.engine('hbs', exphbs.engine({
   layoutsDir: path.join(__dirname, 'views/layouts'),
   partialsDir: path.join(__dirname, 'views/partials'),
   helpers: {
-    eq: function(a, b) {
+    eq: function (a, b) {
       return a === b;
     },
-    formatPrice: function(price) {
+    formatPrice: function (price) {
       return `₹${parseFloat(price).toFixed(2)}`;
     },
-    add: function(a, b) {
+    add: function (a, b) {
       return parseInt(a) + parseInt(b);
     },
-    subtract: function(a, b) {
+    subtract: function (a, b) {
       return parseInt(a) - parseInt(b);
     },
-    currentYear: function() {
+    currentYear: function () {
       return new Date().getFullYear();
     },
-    times: function(n, block) {
+    times: function (n, block) {
       let accum = '';
-      for(let i = 0; i < n; ++i) {
+      for (let i = 0; i < n; ++i) {
         accum += block.fn(i);
       }
       return accum;
     },
-    substring: function(str, start, end) {
+    substring: function (str, start, end) {
       return str.substring(start, end);
     },
-    json: function(context) {
+    json: function (context) {
       return JSON.stringify(context);
     }
   }
@@ -80,6 +82,11 @@ app.use((req, res, next) => {
   res.locals.userEmail = req.session.userEmail || null;
   next();
 });
+
+// ✅ Passport init (must be after session)
+require('./config/passport');
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -120,7 +127,7 @@ async function start() {
       // Run migrations
       console.log('🔄 Running database migrations...');
       console.log(`📊 Database: ${config.db.database}@${config.db.host}:${config.db.port}`);
-      
+
       try {
         await migrate();
         console.log('✅ Migrations completed successfully\n');
@@ -137,7 +144,7 @@ async function start() {
     } else {
       console.log('⏭️  Skipping migrations (already run by startup script)\n');
     }
-    
+
     // Initialize pool
     try {
       getPool();
@@ -146,7 +153,7 @@ async function start() {
       console.error('❌ Failed to initialize database pool:', poolError.message);
       throw poolError;
     }
-    
+
     // Start server
     app.listen(PORT, () => {
       console.log(`🚀 Stella Pet Services running on http://localhost:${PORT}`);
