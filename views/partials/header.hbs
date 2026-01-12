@@ -32,22 +32,21 @@
       </a>
 
       {{!-- <!-- Dark Mode Toggle -->
-      <button
-        id="themeToggle"
-        class="p-2 rounded-full hover:bg-gray-100 transition"
-        aria-label="Toggle Dark Mode"
-      >
+      <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-100 transition" aria-label="Toggle Dark Mode">
         🌙
       </button> --}}
 
       <!-- Auth Links -->
-      <a href="/login" class="nav-link">
-        Login
-      </a>
 
-      <a href="/register" class="btn-secondary">
-        Sign Up
-      </a>
+      {{#if userName}}
+      <form action="/logout" method="POST" style="display:inline;">
+        <button type="submit" class="btn-secondary">Logout</button>
+      </form>
+      {{else}}
+      <a href="/login" class="nav-link">Login</a>
+      <a href="/register" class="btn-secondary">Sign Up</a>
+      {{/if}}
+
 
       <!-- CTA -->
       <a href="/booking" class="btn-primary">

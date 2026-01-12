@@ -5,6 +5,8 @@ const rateLimit = require('express-rate-limit');
 const { body, validationResult } = require('express-validator');
 const { findByEmail, create } = require('../../repositories/users');
 const { redirectIfUserAuth, requireUserAuth } = require('../../middleware/auth');
+const passport = require('passport');
+
 
 // Rate limiting for login and register
 const authLimiter = rateLimit({
@@ -30,7 +32,7 @@ router.get('/login', redirectIfUserAuth, (req, res) => {
 });
 
 // POST /login
-router.post('/login', 
+router.post('/login',
   authLimiter,
   [
     body('email').isEmail().normalizeEmail().withMessage('Valid email is required'),
@@ -47,14 +49,20 @@ router.post('/login',
 
     try {
       const user = await findByEmail(email);
-      
+
       if (!user) {
         req.flash('error', 'Invalid email or password');
         return res.redirect('/login');
       }
 
+      if (!user.password_hash) {
+        req.flash('error', 'This account uses social login. Please login with Google/Facebook.');
+        return res.redirect('/login');
+      }
+
+
       const isValid = await bcrypt.compare(password, user.password_hash);
-      
+
       if (!isValid) {
         req.flash('error', 'Invalid email or password');
         return res.redirect('/login');
@@ -64,7 +72,7 @@ router.post('/login',
       req.session.userId = user.id;
       req.session.userEmail = user.email;
       req.session.userName = user.name;
-      
+
       req.flash('success', 'Login successful');
       res.redirect('/dashboard');
     } catch (error) {
@@ -74,6 +82,42 @@ router.post('/login',
     }
   }
 );
+
+// -------------------- SSO: GOOGLE --------------------
+router.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+router.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login', failureFlash: true }),
+  (req, res) => {
+    // Set session (same keys as normal login)
+    req.session.userId = req.user.id;
+    req.session.userEmail = req.user.email;
+    req.session.userName = req.user.name;
+
+    req.flash('success', 'Logged in with Google');
+    return res.redirect('/dashboard');
+  }
+);
+
+// -------------------- SSO: FACEBOOK --------------------
+router.get('/auth/facebook',
+  passport.authenticate('facebook', { scope: ['email'] })
+);
+
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login', failureFlash: true }),
+  (req, res) => {
+    req.session.userId = req.user.id;
+    req.session.userEmail = req.user.email;
+    req.session.userName = req.user.name;
+
+    req.flash('success', 'Logged in with Facebook');
+    return res.redirect('/dashboard');
+  }
+);
+
 
 // GET /register
 router.get('/register', redirectIfUserAuth, (req, res) => {
@@ -123,12 +167,12 @@ router.post('/register',
 
       // Create user
       const user = await create({ name, email, phone, password });
-      
+
       // Set session
       req.session.userId = user.id;
       req.session.userEmail = user.email;
       req.session.userName = user.name;
-      
+
       req.flash('success', 'Registration successful! Welcome to Stella Pet Services');
       res.redirect('/dashboard');
     } catch (error) {
@@ -140,12 +184,30 @@ router.post('/register',
 );
 
 // POST /logout
+// router.post('/logout', requireUserAuth, (req, res) => {
+//   req.session.destroy((err) => {
+//     if (err) {
+//       console.error('Logout error:', err);
+//     }
+//     res.redirect('/');
+//   });
+// });
+
+// POST /logout  (keep if you already use a logout form)
 router.post('/logout', requireUserAuth, (req, res) => {
+  const cookieName = process.env.SESSION_COOKIE_NAME || 'connect.sid';
+
   req.session.destroy((err) => {
     if (err) {
       console.error('Logout error:', err);
+      // req.flash('error', 'Logout failed, please try again');
+      return res.redirect('/dashboard');
     }
-    res.redirect('/');
+
+    res.clearCookie(cookieName, { path: '/' });
+
+    // req.flash('success', 'Logged out successfully');
+    return res.redirect('/');
   });
 });
 
