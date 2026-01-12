@@ -23,6 +23,9 @@ router.get('/login', redirectIfUserAuth, (req, res) => {
     title: 'Login - Stella Pet Services',
     description: 'Login to your account to view your bookings',
     activeRoute: '/login',
+    hideFooter: true,
+    hideHeader: true,
+    noScroll: true,
     error: req.flash('error'),
     success: req.flash('success')
   });
@@ -122,6 +125,9 @@ router.get('/register', redirectIfUserAuth, (req, res) => {
     title: 'Register - Stella Pet Services',
     description: 'Create an account to manage your pet service bookings',
     activeRoute: '/register',
+    hideFooter: true,
+    hideHeader: true,
+    noScroll: true,
     error: req.flash('error'),
     success: req.flash('success')
   });
